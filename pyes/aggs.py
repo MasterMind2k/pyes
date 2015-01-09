@@ -81,6 +81,18 @@ class BucketAgg(Agg):
         raise NotImplementedError
 
 
+class ChildrenAgg(BucketAgg):
+    _internal_name = 'children'
+
+    def __init__(self, name, type, **kwargs):
+        super(ChildrenAgg, self).__init__(name, **kwargs)
+        self.type = type
+
+    def _serialize(self):
+        return {
+            'type': self.type
+        }
+
 class FilterAgg(BucketAgg):
 
     _internal_name = "filter"
